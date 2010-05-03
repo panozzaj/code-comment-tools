@@ -1,0 +1,11 @@
+Rules / ideas
+C-like only (C, C++, Java, C#)
+ For lines stripped of whitespace at the end,
+  Check for lines ending with end-line delimiter
+  Check for language keywords or syntax types
+  Check for comments that have other comments embedded in them
+  Check for functions that exist in the code
+
+Might want an option or something that detects that something is a print statement that is often useful for debugging certain sections.  Not clear that this will be useful, so not writing up quite yet.
+
+Lookahead/lookbehind to see if there are comments above/behind that are describing this commented out code (could just be done by human diffing for now)
