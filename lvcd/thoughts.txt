@@ -1,0 +1,147 @@
+High-level thoughts
+
+My theory is that the low-value comments don't add information, so we can look at surrounding code to see what information we can normally glean from reading the source and see what the comments add to them.  When in doubt, leave it in, but I wonder how much we can detect automatically...
+
+Could look for duplicate or near-duplicate comments, as this is a smell in the codebase.
+
+Could have various rules or heuristics.  Could also be statistical instead, although we might require a code game or something to get the number of results to build effectively.
+
+
+=====
+
+Examples:
+
+=====
+
+    public static string GetPath()
+    {
+         ...
+    } /* GetPath */
+
+Explanation:  We don't like comments at end of blocks that restate where we were in the block (smell, and editors have %-like functions)
+
+=====
+
+if (blah) {
+...
+} // end for
+
+Explanation:  Probably wrong or misleading comment here
+
+=====
+
+...
+{
+        // do nothing
+}
+...
+
+Explanation:  obviously this does nothing, as it is an empty code block
+Thoughts:  Need to be able to detect empty code blocks
+
+=====
+
+// Constructor
+// Default constructor
+// Destructor
+
+Explanation:  Some people feel the need to say what constructors are in code.
+Thoughts:  Need awareness of surrounding lines, and what constructors/destructors look like.
+
+=====
+
+//!	Gets the width of object
+virtual int get_width() const { return m_width; }
+...
+int num_soldiers;    // number of soldiers
+...
+//Set user's name
+$user->name = 'John Smith';
+
+Explanation:  Simply restates what the thing does.
+Thoughts:  Take comment, strip out low-value (common) words/articles and compare to what it is associated with.  Consider abbreviations, order inspecific.
+
+=====
+
+// :)
+
+Explanation:  comment contains emoticons
+Thoughts:  look for common emoticons (needs to be somewhat smart to avoid false-positives)
+
+=====
+
+  def get_x(self):   
+    """   
+    This method gets x.   
+    """  
+
+/// <summary>
+/// whatnot
+/// </summary>
+/// <parameter>file</parameter>
+/// <returns>boolean</returns>
+public bool CheckFile(File file) {
+        ...
+}
+
+Explanation: Doc comment that just says what the parameters are or what the return type is
+Thoughts:  Need to know (probably?) what the structure of the doc comments are, and compare to signatures, etc.  Same as num_soldiers for abbreviations, etc.
+
+=====
+
+# AJP20100505
+...code...
+#/AJP20100505
+
+Explanation:  things that wrap the source code and just contain author information
+Thoughts:  detecting contributor comments by analyzing comment structure and also looking at source code repo for identifiers of people (AJP, etc.)
+
+=====
+
+$value = 'bad'; //FIX THIS
+
+Explanation:  If this comment was checked in, it will never be fixed.
+Thoughts:  General parsing of FIXME, TODO, HACK, XXX, etc.
+
+=====
+
+//
+// Section handling
+//
+Section.Location = new Point(44, 379);
+Section.Name = "Section";
+Section.Size = new Size(77, 19);
+Section.TabIndex = 10;
+Section.Text = "0";
+Section.TextAlign = HorizontalAlignment.Right;
+
+Explanation:  Clearly the top comment just describes that we are doing stuff with sections
+Thoughts:
+
+=====
+
+Near top of file.c
+// 20100505 - AJP added some code
+// 20100507 - ABC removed some code
+
+Explanation:  We can look at the source history to see who moved the cheese.
+Thoughts: 
+
+
+
+
+
+Challenges
+
+=====
+
+figuring out what comments around commented out code were comments for that code
+      //}
+    } /* textBox1_TextChanged */
+
+Needs to associate up or down possibly
+
+
+
+Possible Extensions
+translating comments in foreign languages

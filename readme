@@ -1,0 +1,18 @@
+=Idea
+
+This repo will contain tools to help work with source code comments.  I looked around and didn't find much that suited my needs.
+
+I am primarily interested in the following things at the moment:
+ - detecting commented out code (COC)
+ - detecting low-value comments (LVC)
+
+I have a pretty decent grasp of how to detect COC from intuition and looking at the Sonar project's source for Java commented out code detection.
+
+I'm not really sure how to figure out what comments have low value, although I have been doing some brainstorming.
+
+
+=Why am I interested in this?
+
+It seems like every project that I go to has legacy code artifacts somewhere.  I'd like to stop wasting my time and effort doing things manually, and instead have some more automated tools for everyone to use.  Plus, I think the detecting LVC stuff is algorithmically interesting.
+
+For code to experiment on, I'm using the open-source UFO2000 codebase.  It is a remake of a game that I enjoyed playing in high school.  I'll probably be doing refactoring with this as well using open-source tools.

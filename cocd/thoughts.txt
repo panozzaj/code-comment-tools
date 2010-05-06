@@ -9,3 +9,11 @@ C-like only (C, C++, Java, C#)
 Might want an option or something that detects that something is a print statement that is often useful for debugging certain sections.  Not clear that this will be useful, so not writing up quite yet.
 
 Lookahead/lookbehind to see if there are comments above/behind that are describing this commented out code (could just be done by human diffing for now)
+ In general we need more context to do more interesting things
+ Comments of a feather flock together
+
+Would be nice to use pretty command-line usage, etc. tool
+
+
+When multiple languages supported:
+File type detection
